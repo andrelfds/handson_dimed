@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding= "UTF-8"?>
+<jboss-web>
+    <context-root>handson</context-root>
+
+  <replication-config>
+    <cache-name>custom-session-cache</cache-name>
+    <replication-trigger>SET</replication-trigger>
+    <replication-granularity>ATTRIBUTE</replication-granularity>
+    <use-jk>false</use-jk>
+    <max-unreplicated-interval>30</max-unreplicated-interval>
+    <snapshot-mode >INSTANT</snapshot-mode>
+    <snapshot-interval>1000</snapshot-interval>
+    <replication-mode>SYNCHRONOUS</replication-mode>
+  </replication-config>
+</jboss-web>

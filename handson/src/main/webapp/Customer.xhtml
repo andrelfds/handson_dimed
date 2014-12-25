@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+<ui:composition template="/WEB-INF/facelets/templates/defaultLayout.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{msg.windowTitleCustomer}" />
+	</ui:define>
+	<ui:define name="content">
+		<h:body>
+			<h:form prependId="false">
+				<pe:masterDetail id="masterDetail" level="#{customerMB.currentLevel}" showBreadcrumb="false">
+					<f:facet name="header">
+						<p:growl showDetail="true" />
+						<h:panelGroup layout="block" style="margin-top: 10px;">
+							<h:panelGroup styleClass="levelTitle ui-state-default ui-corner-all  
+                                  #{customerMB.currentLevel eq 1 ? 'ui-state-hover' : ''}">
+								<h:outputText value="Personal" />
+							</h:panelGroup>
+							<h:panelGroup styleClass="levelTitle ui-state-default ui-corner-all  
+                                  #{customerMB.currentLevel eq 2 ? 'ui-state-hover' : ''}">
+								<h:outputText value="Address" />
+							</h:panelGroup>
+						</h:panelGroup>
+					</f:facet>
+
+					<pe:masterDetailLevel level="1">
+						<p:panel header="Personal Details">
+							<h:panelGrid columns="2" columnClasses="formColumn1,formColumn2">
+								<h:outputText value="Firstname: *" />
+								<p:inputText required="true" label="Firstname" value="#{customerMB.customer.name}" />
+								<h:outputText value="Registration Document: *" />
+								<p:inputText required="true" label="Lastname" value="#{customerMB.customer.registrationDocument}" />
+								<h:outputText value="Personal Type " />
+								<p:selectOneMenu value="#{customerMB.customer.personalType}" >
+									<f:selectItem itemLabel="Select One" itemValue=""/>
+									<f:selectItem itemLabel="Individual Physical" itemValue="IndividualPhysical" />
+									<f:selectItem itemLabel="Juridical Person" itemValue="JuridicalPerson" />
+								</p:selectOneMenu>
+							</h:panelGrid>
+						</p:panel>
+						<p:commandButton value="Next" process="masterDetail" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+							<pe:selectDetailLevel step="1" />
+						</p:commandButton>
+						<p:commandButton value="Go to Save" process="masterDetail" style="margin-top: 10px;" icon="ui-icon-arrowthickstop-1-e">
+							<pe:selectDetailLevel level="4" />
+						</p:commandButton>
+					</pe:masterDetailLevel>
+
+					<pe:masterDetailLevel level="2">
+						<p:panel header="Address Details">
+							<h:panelGrid columns="2" columnClasses="formColumn1,formColumn2">
+								<h:outputText value="Street: " />
+								<p:inputText value="#{customerMB.address.street}" />
+								<h:outputText value="Number: " />
+								<p:inputText value="#{customerMB.address.number}" />
+								<h:outputText value="Addition: " />
+								<p:inputText value="#{customerMB.address.addition}" />
+								<h:outputText value="City: " />
+								<p:inputText value="#{customerMB.address.city}" />
+								<h:outputText value="District: " />
+								<p:inputText value="#{customerMB.address.district}" />
+								<h:outputText value="State: " />
+								<p:inputText value="#{customerMB.address.state}" />
+								<h:outputText value="Postal Code: " />
+								<p:inputText value="#{customerMB.address.zip}" />
+								
+							</h:panelGrid>
+						</p:panel>
+						<p:commandButton value="Back" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w" process="@this" immediate="true" >
+							<pe:selectDetailLevel step="-1" />
+						</p:commandButton>
+						<p:commandButton value="Next" process="masterDetail" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-e">
+							<pe:selectDetailLevel step="1" />
+						</p:commandButton>
+					</pe:masterDetailLevel>
+
+
+					<pe:masterDetailLevel level="3">
+						<p:panel header="Confirmation">
+							<h:panelGrid id="confirmation" columns="2" columnClasses="formColumn1,formColumn2">
+								<h:outputText value="Nname: " />
+								<h:outputText value="#{customerMB.customer.name}" />
+								<h:outputText value="Registration Document: " />
+								<h:outputText value="#{customerMB.customer.registrationDocument}" />
+								<h:outputText value="Personal Type: " />
+								<h:outputText value="#{customerMB.customer.personalType}" />
+								<h:outputText value="Street: " />
+								<h:outputText value="#{customerMB.address.street}" />
+								<h:outputText value="Number: " />
+								<h:outputText value="#{customerMB.address.number}" />
+								<h:outputText value="Addition: " />
+								<h:outputText value="#{customerMB.address.addition}" />
+								<h:outputText value="City: " />
+								<h:outputText value="#{customerMB.address.city}" />
+								<h:outputText value="District " />
+								<h:outputText value="#{customerMB.address.district}" />
+								<h:outputText value="State: " />
+								<h:outputText value="#{customerMB.address.state}" />
+								<h:outputText value="Postal Code: " />
+								<h:outputText value="#{customerMB.address.zip}" />
+								</h:panelGrid>
+						</p:panel>
+						<p:commandButton value="Back" style="margin-top: 10px;" icon="ui-icon-arrowthick-1-w" process="@this" immediate="true">
+							<pe:selectDetailLevel step="-1" />
+						</p:commandButton>
+						<p:commandButton value="Submit" process="masterDetail"	actionListener="#{customerMB.save}" style="margin-top: 10px;" icon="ui-icon-disk">
+							<pe:selectDetailLevel level="1" />
+						</p:commandButton>
+					</pe:masterDetailLevel>
+				</pe:masterDetail>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

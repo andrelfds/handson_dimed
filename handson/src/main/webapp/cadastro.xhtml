@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="/WEB-INF/facelets/templates/defaultLayout.xhtml">
+	<ui:define name="title">
+		<h:outputText value="#{msg.windowTitleUser}" />
+	</ui:define>
+	<ui:define name="content">
+		<h:body>
+			<p:growl />
+			<h:form id="form">
+				<p:panel id="panel" header="#{msg.windowTitle}">
+					<p:messages id="msgs" />
+					<p:graphicImage value="#{animalBean.animal.foto}" width="50" height="60" style="border: 20px" />
+					<p:panelGrid header="#{msg.windowTitle}" columns="2">
+						<p:outputLabel id="labelraca" value="#{msg.labelRaca}" />
+						<p:inputText id="raca" value="#{animalBean.animal.raca }" required="true" size="20" />
+
+						<p:outputLabel id="labelregistro" value="#{msg.labelRegistro}" />
+						<p:inputText value="#{animalBean.animal.registro}" required="true" />
+
+						<p:outputLabel id="familialabel" value="#{msg.labelFamilia}" />
+						<p:selectOneMenu value="#{animalBean.animal.familia}" required="true">
+							<f:selectItem itemLabel="Selecione uma Familia" itemValue="" />
+							<f:selectItem itemLabel="Cãos" itemValue="Caos" />
+							<f:selectItem itemLabel="Gatos" itemValue="Gatos" />
+							<f:selectItem itemLabel="Passaros" itemValue="Passaros" />
+						</p:selectOneMenu>
+
+						<p:outputLabel id="nascimentoLabel" value="#{msg.labelAataNascimento}" />
+						<p:calendar id="nascimento" value="#{animalBean.animal.dataNascimento}" />
+
+					</p:panelGrid>
+
+					<p:panelGrid columns="3" styleClass="ui-widget-header">
+						<f:facet name="header">
+							<p:outputLabel value="Medidas" />
+						</f:facet>
+						<p:column colspan="1">
+							<p:outputLabel id="alturalabel" value="#{msg.labelAltura}" style="text-align: left;" />
+							<p:inputText id="altura" label="#{msg.labelAltura}" value="#{animalBean.animal.altura}" size="5" maxlength="5" required="true" />
+						</p:column>
+
+
+						<p:column colspan="1">
+							<p:outputLabel id="comprimentoLabel" value="#{msg.labelComprimento}" />
+							<p:inputText id="comprimento" label="#{msg.labelComprimento}" value="#{animalBean.animal.comprimento}" size="5" maxlength="5" required="true" />
+						</p:column>
+
+						<p:column colspan="1" style="text-align: right">
+							<p:outputLabel id="pesolabel" value="#{msg.labelPeso}" />
+							<p:inputText id="peso" label="#{msg.labelPeso}" value="#{animalBean.animal.peso}" size="5" maxlength="5" required="true" />
+						</p:column>
+					</p:panelGrid>
+					<p:panelGrid columns="1" styleClass="ui-widget-header">
+						<f:facet name="gg">
+							<p:outputLabel value="Medidas" />
+						</f:facet>
+						<p:outputLabel value="#{msg.labelDescricao}" />
+						<p:editor id="descricao" label="#{msg.labelDescricao}" value="#{animalBean.animal.descricao }" required="true" />
+					</p:panelGrid>
+					<f:facet name="footer">
+						<p:commandButton value="#{msg.botaoSalvar}" update="panel" action="submit()" icon="ui-icon-disk" style="margin:3" />
+						<p:commandButton id="cancelar" action="reset" value="#{msg.botaoCancelar}" type="reset" icon="ui-icon-extlink" />
+					</f:facet>
+
+				</p:panel>
+			</h:form>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

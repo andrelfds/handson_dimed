@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title><h:outputLabel value="#{msg.windowTitleLogin}" /></title>
+	<h:outputStylesheet name="comum.css" library="css" />
+</h:head>
+<h:body style="background-image:url('resources/images/fundo3.jpg');
+          background-color:transparent; background-repeat: no-repeat;background-size: 100%;	">
+
+	<div id="logo" align="left">
+		<p:graphicImage value="/resources/images/logo.png" height="100" width="200" />
+	</div>
+
+	<div id="login" align="center" style="background-color: transparent;">
+		<h:form id="userform" prependId="false">
+			<p:growl id="growl" />
+			<p:panel id="panel" style="background-color: transparent;">
+				<p:panelGrid columns="2" layout="grid" style="background-color: transparent;">
+					<h:outputText value="#{msg.labelUserName}" />
+					<h:inputText label="user" value="#{loginMB.login.name}" required="true" />
+					<h:outputText value="#{msg.labelUserPassword}" />
+					<h:inputSecret label="password" value="#{loginMB.login.password}" required="true" />
+				</p:panelGrid>
+			</p:panel>
+				<br />
+				<p:commandButton action="#{loginMB.doLogin()}" value="#{msg.bottonLogin}" update="growl" />
+				<p:commandButton type="reset" value="#{msg.buttonCalcel}" />
+		
+		</h:form>
+	</div>
+</h:body>
+</html>
